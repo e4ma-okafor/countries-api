@@ -1,0 +1,112 @@
+:root {
+    --bg-color: hsl(0, 0%, 98%);
+    --text-color: hsl(200, 15%, 8%);
+    --bg-color-dark: hsl(207, 26%, 17%);
+    --text-color-dark: hsl(0, 0%, 100%);
+    --dark-mode: hsl(209, 23%, 22%);
+    --light-mode: hsl(0, 0%, 100%);
+    --input-element: hsl(0, 0%, 52%);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+body.dark-mode {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+#theme-switch {
+    cursor: pointer;
+}
+
+.header {
+    box-shadow: rgba(200,200,200,0.25) 1.95px 1.95px 2.6px;
+    background: var(--light-mode);
+}
+
+body.dark-mode .header {
+    background: var(--dark-mode);
+    box-shadow: rgba(54, 54, 54, 0.25) 1.95px 1.95px 2.6px;
+}
+
+.search {
+    width: 35%;
+}
+
+input[type="search"] {
+    background: url("../img/icons8-search-48.png") no-repeat 15px center;
+    background-size: 20px 20px;
+    padding: 16px 0px 16px 60px;
+    cursor: pointer;
+} 
+
+body.dark-mode input {
+    background-image: url(../img/icons8-search-48-white.png);    
+} 
+
+::-webkit-input-placeholder {
+    color: var(--input-element);    
+}
+
+body.dark-mode input::-webkit-input-placeholder {
+    color: var(--text-color-dark);    
+}
+
+#continent-select {  
+    width: 15rem !important;      
+    cursor: pointer;    
+}
+
+input[type="search"],
+#continent-select,
+.back-btn {
+    background-color: hsl(0, 0%, 100%);
+    color: var(--text-color);     
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;    
+    border: none;
+    box-shadow: rgba(200,200,200,0.25) 0px 0px 8px 2px, rgba(200,200,200,0.20) 0px 0px 8px 2px;  
+}
+
+body.dark-mode input,
+body.dark-mode #continent-select,
+body.dark-mode .back-btn {
+    background-color: var(--dark-mode);  
+    color: var(--text-color-dark); 
+    box-shadow: rgba(54, 54, 54, 0.25) 1.95px 1.95px 2.6px;
+}
+
+#world-countries {
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 80px;    
+}
+
+.country-card {
+    background: var(--light-mode);
+    overflow: hidden;
+    color: var(--text-color);
+    box-shadow: 0px 0px 8px 2px rgba(200,200,200,0.25);
+}
+
+body.dark-mode .country-card {
+    background: var(--dark-mode);
+    color: var(--text-color-dark);
+    box-shadow: 0px 0px 4px 1px rgba(54, 54, 54, 0.25);
+}
+
+.back-btn {
+    width: 10%;
+}
