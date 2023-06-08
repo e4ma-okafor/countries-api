@@ -5,8 +5,7 @@ const modeText = document.querySelector('.theme');
 let screenMode;
 const backBtn = document.querySelector(".back-btn");
 const theCountry = document.getElementById("the-country")
-const countryURL = new URLSearchParams(window.location.search);
-const countryCode = countryURL.get('theCountry');
+let countryCode = new URLSearchParams(window.location.search).get("country");
 let allCountries = [];
 let countryArray = [];
 
@@ -36,37 +35,38 @@ const fetchCountries = () => {
         .then(data => {
             console.log(data);
             allCountries = data.map(item => {
-                return [item.cca3, item.name.common];
+                return [item.cca3, item.name.common]
             })
-            data = data.filter(item => item.cca3 === countryCode);            
+            data = data.filter(item => item.cca3 === countryCode)
+            console.log(data);          
             document.title = `${data[0].name.common} - Countries of the world`
 
-            const counBorders = arr => {
+            const borders = arr => {
                 let newArr = [], coun = '';
                 if (arr != undefined) {
                     for (let item of arr) {
                         coun = allCountries.filter(a => a[0] === item)
                         newArr.push(coun[0][1])
-                    }
+                    } 
                 }
-                return newArr;
+                return newArr
             }
 
             countryArray = data.map(item => {
-                const language = lang => {
-                    let arr = Object.entries(lang), newArr = [];
+                const lang = obj => {
+                    let arr = Object.entries(obj), newArr = [];
                     for (let item of arr) {
                         newArr.push(item[1])
                     }
-                    return newArr.join(', ');
+                    return newArr.join(', ')
                 }
 
-                const currency = cur => {
-                    let arr = Object.entries(cur), newArr = [];
+                const cur = obj => {
+                    let arr = Object.entries(obj), newArr = [];
                     for (let item of arr) {
                         newArr.push(item[1].name)
                     }
-                    return newArr.join(', ');
+                    return newArr.join(', ') 
                 }
 
                 return {
@@ -78,9 +78,9 @@ const fetchCountries = () => {
                     'continent': String(item.continents),
                     'capital': String(item.capital || 'nil') ,
                     'tld': String(item.tld),
-                    'currencies': currency(item.currencies),
-                    'languages': language(item.languages),
-                    'borders': counBorders(item.borders),
+                    'currencies': cur(item.currencies),
+                    'languages': lang(item.languages),
+                    'borders': borders(item.borders),
                     'bordersShort': item.borders,
                     'flag': item.flags.png
                 }
@@ -105,49 +105,49 @@ const fetchCountries = () => {
 fetchCountries();
 
 const displayCountry = arr => {
-    let countryCard;
-    const borderBtn = () => {
-        let bDBtn = ``;
+    const borderBtns = () =>{
+        let bCBtn = ``;
         if (arr[0].borders != undefined) {
             for (let i = 0; i < arr[0].borders.length; i++) {
-                bDBtn +=    `<a href="country.html?country=${arr[0].bordersShort[i]}" class="text-decoration-none w-auto h-auto p-0 m-0">
-                                <button class="bc rounded m-0 py-1 px-3">
-                                    <p class="fs-small fw-600 opacity-9 m-0 p-0">${arr[0].borders[i]}</p>
-                                </button>
+                bCBtn +=    `
+                            <a class="btn ms-3 mb-3" href="country.html?country=${arr[0].bordersShort[i]}" role="button">
+                                ${arr[0].borders[i]}
                             </a>`
             }
         }
-        return bDBtn;
+        return bCBtn;
     }
 
-    countryCard = `
-                    <div class="left-section">
-                        <img src="${arr[0].flag}" alt="Flag of ${arr[0].commonName}" class="img-fluid">
-                    </div>
-                    <div class="right-section">
-                        <h1>${arr[0].commonName}</h1>
-                        <div class="countryInfo">
-                            <div class="countryInfo1">
-                                <p class="fw-600 fs-small mb-2">Native Name: <span class="native_name fw-300 opacity-9">${arr[0].nativeName}</span></p>
-                                <p class="fw-600 fs-small mb-2">Population: <span class="population fw-300 opacity-9">${arr[0].population}</span></p>
-                                <p class="fw-600 fs-small mb-2">Region: <span class="region fw-300 opacity-9">${arr[0].region}</span></p>                                
-                                <p class="fw-600 fs-small mb-3">Capital: <span class="capital fw-300 opacity-9">${arr[0].capital}</span></p>
-                            </div>
-                            <div class="countryInfo2">
-                                <p class="fw-600 fs-small mb-2">Top Level Domain: <span class="tld fw-300 opacity-9">${arr[0].tld}</span></p>
-                                <p class="fw-600 fs-small mb-2">Currencies: <span class="currencies fw-300 opacity-9">${arr[0].currencies}</span></p>
-                                <p class="fw-600 fs-small mb-2">Sub-Region: <span class="sub-region fw-300 opacity-9">${arr[0].subRegion}</span></p>
-                                <p class="fw-600 fs-small mb-2">Languages: <span class="languages fw-300 opacity-9">${arr[0].languages}</span></p>
-                            </div>
-                            <div class="borders mt-4 mt-lg-5 mb-5 mb-lg-0">
-                                <p class="fw-600 m-0 mt-1 mb-lg-0">Border Countries: </p>
-                                <div id="bcs" class="border-countries d-flex flex-wrap ms-0 ms-lg-0">
-                                    ${borderBtn()}
-                                </div>
-                            </div>
+    card = `<div class="flag">
+                <img src="${arr[0].flag}" alt="Flag of ${arr[0].commonName}" class="w-100 h-100">
+            </div>
+            <div class="details d-flex align-items-center">
+                <div class="details-wrap w-100">
+                    <h1 class="country-name fw-800 mb-4">${arr[0].commonName}</h1>
+                    <div class="detail-columns my-3">
+                        <div class="column1">
+                            <p class="mb-2">Native Name: <span class="native_name">${arr[0].nativeName}</span></p>
+                            <p class="mb-2">Population: <span class="population">${arr[0].population}</span></p>
+                            <p class="mb-2">Region: <span class="region">${arr[0].region}</span></p>                            
+                            <p class="mb-2">Capital: <span class="capital">${arr[0].capital}</span></p>
                         </div>
-                    </div>     
-                `
-    theCountry.innerHTML = countryCard;    
+                        <div class="column2">
+                            <p class="mb-2">Top Level Domain: <span class="tld">${arr[0].tld}</span></p>
+                            <p class="mb-2">Currencies: <span class="currencies">${arr[0].currencies}</span></p>
+                            <p class="mb-2">Sub-Region: <span class="sub-region">${arr[0].subRegion}</span></p>
+                            <p class="mb-2">Languages: <span class="languages">${arr[0].languages}</span></p>
+                        </div>
+                    </div>
+                    <div class="borders d-flex justify-content-between mt-4">
+                        <p>Border Countries: </p>
+                        <div id="bcs" class="border-countries">
+                            ${borderBtns()}
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>`
+
+    theCountry.innerHTML = card;   
 }
 

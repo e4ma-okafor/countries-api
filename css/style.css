@@ -91,7 +91,7 @@ body.dark-mode .back-btn {
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: repeat(4, 1fr);
-    gap: 80px;    
+    gap: 60px;    
 }
 
 .country-card {
@@ -101,7 +101,8 @@ body.dark-mode .back-btn {
     box-shadow: 0px 0px 8px 2px rgba(200,200,200,0.25);
 }
 
-body.dark-mode .country-card {
+body.dark-mode .country-card,
+body.dark-mode .border-countries .btn {
     background: var(--dark-mode);
     color: var(--text-color-dark);
     box-shadow: 0px 0px 4px 1px rgba(54, 54, 54, 0.25);
@@ -109,4 +110,133 @@ body.dark-mode .country-card {
 
 .back-btn {
     width: 10%;
+}
+
+#the-country .details {
+    width: 45%;
+}
+
+#the-country .flag {
+    width: 50%;
+    height: 60vh;
+}
+
+#the-country {       
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-columns {
+    display: flex; 
+    justify-content: space-between;        
+}
+
+.detail-columns p,
+.borders p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.detail-columns span {
+    font-weight: lighter;
+}
+
+.border-countries .btn {
+    background: #fff;
+    box-shadow: 0px 0px 8px 2px rgba(200,200,200,0.25);
+}
+
+.border-countries {
+    display: flex;
+    width: 70%;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 426px) {
+    #theme-switch p {
+        display: none;
+    }
+
+    #form-section .d-flex,
+    #the-country,
+    .detail-columns,
+    #the-country .d-flex {
+        flex-direction: column;
+    }
+
+    .search {
+        width: 90% !important;
+        margin-bottom: 20px;
+    }
+
+    #world-countries {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .country-card {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .back-btn {
+        width: 25%;
+    }
+
+    #the-country .flag,
+    #the-country .details,
+    .border-countries {
+        width: 100% !important;
+    }
+
+    #the-country .country-name {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 769px) and (min-width: 426px) {
+    #world-countries {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 60px;
+    }
+
+    .country-card {
+        width: 90%;        
+    }
+
+    .back-btn {
+        width: 15%;
+    }
+
+    #the-country {
+        flex-direction: column;
+    }
+
+    #the-country .flag,
+    #the-country .details {
+        width: 90% !important;
+    }
+
+    #the-country .country-name {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 1025px) and (min-width: 769px) {
+    #world-countries {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 50px;
+    }
+
+    .border-countries {
+        width: 60% !important;        
+    }
+
+    #the-country .flag {
+        width: 48%;
+        height: 100vh;
+        margin-bottom: 50px;
+    }
 }

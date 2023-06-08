@@ -5,9 +5,6 @@ const modeText = document.querySelector('.theme');
 let searchInput = document.getElementById("search-Input");
 const worldCountries = document.getElementById("world-countries");
 const continentSelect = document.getElementById("continent-select");
-/*const dropBtn = document.getElementById("dropdown-btn");
-let dropItems = document.querySelectorAll(".dropdown-item");
-let dropText = document.querySelector(".dropdown-btn-text");*/
 let countriesArray = [];
 
 themeSwitch.addEventListener('click', function () {
@@ -20,33 +17,6 @@ themeSwitch.addEventListener('click', function () {
         modeText.textContent = 'Dark mode';
     }
 })
-
-searchInput.addEventListener('focus', () => {    
-    searchValue = searchInput.value;    
-})
-
-searchInput.addEventListener('keypress', (event) => {
-    if (event.key ==='Enter') {
-        event.preventDefault();
-        window.open(`search.html?search=${searchValue}`, '_self');
-    }
-})
-
-/*dropBtn.addEventListener('click', () => {
-    continentSelect.classList.toggle('hide');
-})
-
-dropItems.forEach((item) => {
-    item.addEventListener('click', () => {
-        continentSelect.classList.add('hide');
-        //dropText.innerHTML = item.textContent;
-    })    
-})*/
-
-const search = (event) => {
-    event.preventDefault();
-    window.open(`search.html?search=${searchValue}`, '_self');
-}
 
 const fetchCountries = () => {
     worldCountries.innerHTML = '';
@@ -85,7 +55,7 @@ const fetchCountries = () => {
 }
 fetchCountries();
 
-searchInput.addEventListener('input', () => {    
+/*searchInput.addEventListener('input', () => {    
     const searchTerm = searchInput.value.toLowerCase();
     console.log(searchTerm);
     
@@ -93,7 +63,7 @@ searchInput.addEventListener('input', () => {
         country.name.common.toLowerCase().includes(searchTerm);
     });
     displayCountries(filteredCountries);
-});
+});*/
 
 const displayCountries = arr => {
     let card = ``;
@@ -129,51 +99,3 @@ continentSelect.addEventListener('change', () => {
     }
     displayCountries(continentS);
 })
-
-/*function filterAll() {
-    worldCountries.innerHTML = '';
-    let continentArr = countriesArray;
-    displayCountries(continentArr);
-}
-
-function filterAfrica() {
-    worldCountries.innerHTML = '';
-    let continentArr = countriesArray.filter((item) => item.continent == 'Africa');
-    displayCountries(continentArr);
-}
-
-function filterAsia() {
-    worldCountries.innerHTML = '';
-    let continentArr = countriesArray.filter((item) => item.continent == 'Asia');
-    displayCountries(continentArr);
-}
-
-function filterAntarctica() {
-    worldCountries.innerHTML = '';
-    let continentArr = countriesArray.filter((item) => item.continent == 'Antarctica');
-    displayCountries(continentArr);
-}
-
-function filterEurope() {
-    worldCountries.innerHTML = '';
-    let continentArr = countriesArray.filter((item) => item.continent == 'Europe');
-    displayCountries(continentArr);
-}
-
-function filterNAmerica() {
-    worldCountries.innerHTML = '';
-    let continentArr = countriesArray.filter((item) => item.continent == 'North America');
-    displayCountries(continentArr);
-}
-
-function filterSAmerica() {
-    worldCountries.innerHTML = '';
-    let continentArr = countriesArray.filter((item) => item.continent == 'South America');
-    displayCountries(continentArr);
-}
-
-function filterOceania() {
-    worldCountries.innerHTML = '';
-    let continentArr = countriesArray.filter((item) => item.continent == 'Oceania');
-    displayCountries(continentArr);
-} */
