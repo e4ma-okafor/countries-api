@@ -55,15 +55,21 @@ const fetchCountries = () => {
 }
 fetchCountries();
 
-/*searchInput.addEventListener('input', () => {    
+searchInput.addEventListener('input', () => {    
     const searchTerm = searchInput.value.toLowerCase();
     console.log(searchTerm);
     
-    const filteredCountries = countriesArray.filter((country) => {
-        country.name.common.toLowerCase().includes(searchTerm);
-    });
-    displayCountries(filteredCountries);
-});*/
+    const filteredCountries = countriesArray.filter(country =>        
+        country.name.toLowerCase().includes(searchTerm));  
+    
+    console.log(filteredCountries);
+    if (filteredCountries.length > 0) {
+        console.log("Name found: ", filteredCountries);
+        displayCountries(filteredCountries);
+    } else {
+        console.log("Name not found");
+    }  
+});
 
 const displayCountries = arr => {
     let card = ``;
